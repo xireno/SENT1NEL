@@ -1,74 +1,59 @@
 import time
+import requests
 import os
-import sys
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-# List of file extensions to monitor
-monitored_extensions = ['.txt', '.exe', '.py', '.bat', '.vbs']
+class FileChangeHandler(FileSystemEventHandler):
+    def __init__(self, api_url):
+        self.api_url = api_url
 
-# Dictionary to track recently deleted files (for detecting moves)
-recently_deleted_files = {}
+    def on_modified(self, event):
+        if not event.is_directory:
+            log_message = f"File modified: {event.src_path}"
+            print(log_message)
+            self.send_log(log_message)
 
-class MonitorHandler(FileSystemEventHandler):
-    # Only log files with specific extensions
-    def should_log(self, src_path):
-        _, ext = os.path.splitext(src_path)
-        return ext in monitored_extensions
-
-    # Track file creation and detect possible moves
     def on_created(self, event):
-        if not event.is_directory and self.should_log(event.src_path):
-            filename = os.path.basename(event.src_path)
+        if not event.is_directory:
+            log_message = f"File created: {event.src_path}"
+            print(log_message)
+            self.send_log(log_message)
 
-            # Check if the file was recently deleted (possible move)
-            if filename in recently_deleted_files:
-                time_since_deleted = time.time() - recently_deleted_files[filename]['timestamp']
-                if time_since_deleted < 5:
-                    original_path = recently_deleted_files[filename]['path']
-                    print(f"Moved file: from {original_path} to {event.src_path}")
-                    del recently_deleted_files[filename]
-                    return
-
-            print(f"Created file: {event.src_path}")
-
-    # Track file deletions
     def on_deleted(self, event):
-        if not event.is_directory and self.should_log(event.src_path):
-            filename = os.path.basename(event.src_path)
-            recently_deleted_files[filename] = {
-                'path': event.src_path,
-                'timestamp': time.time()
-            }
-            print(f"Deleted file: {event.src_path}")
+        if not event.is_directory:
+            log_message = f"File deleted: {event.src_path}"
+            print(log_message)
+            self.send_log(log_message)
 
-    # Track file movements
     def on_moved(self, event):
-        if not event.is_directory and self.should_log(event.dest_path):
-            print(f"Moved file: from {event.src_path} to {event.dest_path}")
+        if not event.is_directory:
+            log_message = f"File moved from {event.src_path} to {event.dest_path}"
+            print(log_message)
+            self.send_log(log_message)
 
-if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python detection.py <folder_path>")
-        sys.exit(1)
+    def send_log(self, log_message):
+        try:
+            response = requests.post(self.api_url, json={"log": log_message})
+            if response.status_code != 200:
+                print(f"Failed to send log: {response.status_code} {response.text}")
+        except Exception as e:
+            print(f"Error sending log: {e}")
 
-    path_to_watch = sys.argv[1]
-
-    if not os.path.exists(path_to_watch):
-        print(f"Error: The path {path_to_watch} does not exist.")
-        sys.exit(1)
-
-    event_handler = MonitorHandler()
+def monitor_directory(path_to_monitor, api_url):
+    event_handler = FileChangeHandler(api_url)
     observer = Observer()
-    observer.schedule(event_handler, path_to_watch, recursive=True)
+    observer.schedule(event_handler, path=path_to_monitor, recursive=True)
+    observer.start()
 
     try:
-        observer.start()
-        print(f"Monitoring started on {path_to_watch}")
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
-        print("Monitoring stopped")
-
     observer.join()
+
+if __name__ == "__main__":
+    path_to_monitor = r'C:\Users\User\OneDrive\桌面\siem'  # Change this to your desired path
+    api_url = "http://localhost:5000/logs"
+    monitor_directory(path_to_monitor, api_url)
