@@ -1,32 +1,206 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SENT1NEL</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENT1NEL - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Hero Section Animation */
+        .hero-section {
+            background-image: url('/static/images/hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero-section .cta-button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            animation: bounceIn 2.5s ease-in-out;
+        }
+
+        .hero-section .cta-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Features Section Animation */
+        .features-section {
+            padding: 50px 20px;
+            text-align: center;
+            animation: fadeInUp 2s ease-in-out;
+        }
+
+        .features-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .features-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .feature-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 2.5s ease-in-out;
+        }
+
+        .feature-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .feature-box {
+                width: 100%;
+            }
+        }
+
+        /* Hamburger Menu Animation */
+        .hamburger-lines {
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-lines .line {
+            transition: all 0.3s ease;
+        }
+
+        .checkbox:checked ~ .hamburger-lines .line1 {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .checkbox:checked ~ .hamburger-lines .line2 {
+            opacity: 0;
+        }
+
+        .checkbox:checked ~ .hamburger-lines .line3 {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        .checkbox:checked ~ .menu-items {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+    </style>
 </head>
 <body>
-  <nav>
-    <div class="navbar">
-      <div class="container nav-container">
-          <input class="checkbox" type="checkbox" name="" id="" />
-          <div class="hamburger-lines">
-            <span class="line line1"></span>
-            <span class="line line2"></span>
-            <span class="line line3"></span>
-          </div>  
-        <div class="menu-items">
-          <li><a href="/">Home</a></li>
-          <li><a href="/dashboard">Dashboard</a></li>
-          <li><a href="/monitoring">Monitoring</a></li>
-          <li><a href="#">ThreatDetection</a></li>
-          <li><a href="#">Analytics</a></li>
-          <li><a href="#">Detection</a></li>
-          <li><a href="#">Alerts</a></li>
+    <!-- Navbar Section -->
+    <nav>
+        <div class="navbar">
+            <div class="container nav-container">
+                <input class="checkbox" type="checkbox" name="" id="" />
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>  
+                <div class="menu-items">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/monitoring">Monitoring</a></li>
+                    <li><a href="#">Threat Detection</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Detection</a></li>
+                    <li><a href="#">Alerts</a></li>
+                </div>
+            </div>
         </div>
-      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1>Welcome to SENT1NEL</h1>
+            <p>Security Intelligence and Event Management at Your Fingertips</p>
+            <button class="cta-button">Get Started</button>
+        </div>
     </div>
-  </nav>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <!-- Features Section -->
+    <div class="features-section">
+        <h2>Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-box">
+                <h3>Real-Time Monitoring</h3>
+                <p>Monitor your network and systems in real-time, ensuring you catch issues before they become problems.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Threat Detection</h3>
+                <p>Detect potential threats and take preventive action to keep your systems secure.</p>
+            </div>
+            <div class="feature-box">
+                <h3>Detailed Analytics</h3>
+                <p>View in-depth analytics of your system's events, providing insights into security trends and anomalies.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
