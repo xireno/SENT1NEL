@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIEM Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for graphs -->
+</head>
+<body>
+
+  <nav>
+    <div class="navbar">
+      <div class="container nav-container">
+          <input class="checkbox" type="checkbox" name="" id="" />
+          <div class="hamburger-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+          </div>  
+        <div class="menu-items">
+          <li><a href="/">Home</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container dashboard">
+    <h1>SIEM Dashboard</h1>
+    
+    <!-- Summary Panel -->
+    <div class="summary">
+      <div class="summary-box">
+        <h3>Total Events</h3>
+        <p id="totalEvents">-</p>
+      </div>
+      <div class="summary-box">
+        <h3>Threats Detected</h3>
+        <p id="threatsDetected">-</p>
+      </div>
+      <div class="summary-box">
+        <h3>Critical Alerts</h3>
+        <p id="criticalAlerts">-</p>
+      </div>
+      <div class="summary-box">
+        <h3>High-Risk IPs</h3>
+        <p id="highRiskIPs">-</p>
+      </div>
+    </div>
+
+    <!-- Event Logs -->
+    <div class="logs-section">
+      <h2>Recent Event Logs</h2>
+      <table id="eventLogsTable">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Event</th>
+            <th>Severity</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="eventLogs"></tbody>
+      </table>
+    </div>
+
+    <!-- Threat Alerts -->
+    <div class="threat-section">
+      <h2>Threat Alerts</h2>
+      <ul id="threatAlerts">
+        <!-- Threat alerts will be injected here -->
+      </ul>
+    </div>
+
+    <!-- Event Severity Distribution (Chart) -->
+    <div class="chart-section">
+      <h2>Event Severity Distribution</h2>
+      <canvas id="eventSeverityChart"></canvas>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
