@@ -1,0 +1,11 @@
+{
+  "name": "sent1nel-siem",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^13.6.9"
+  }
+}
