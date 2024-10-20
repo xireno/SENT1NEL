@@ -38,115 +38,6 @@
                 transform: translateY(-15px);
             }
         }
-
-        /* Hero Section Animation */
-        .hero-section {
-            background-image: url('/static/images/hero-background.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 90vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        .hero-section h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .hero-section p {
-            font-size: 1.5rem;
-            margin-top: 20px;
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        .hero-section .cta-button {
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            animation: bounceIn 2.5s ease-in-out;
-        }
-
-        .hero-section .cta-button:hover {
-            background-color: #45a049;
-        }
-
-        /* Features Section Animation */
-        .features-section {
-            padding: 50px 20px;
-            text-align: center;
-            animation: fadeInUp 2s ease-in-out;
-        }
-
-        .features-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-        }
-
-        .features-grid {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .feature-box {
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            width: 30%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            transition: transform 0.2s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 2.5s ease-in-out;
-        }
-
-        .feature-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        @media (max-width: 768px) {
-            .feature-box {
-                width: 100%;
-            }
-        }
-
-        /* Hamburger Menu Animation */
-        .hamburger-lines {
-            transition: all 0.3s ease;
-        }
-
-        .hamburger-lines .line {
-            transition: all 0.3s ease;
-        }
-
-        .checkbox:checked ~ .hamburger-lines .line1 {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .checkbox:checked ~ .hamburger-lines .line2 {
-            opacity: 0;
-        }
-
-        .checkbox:checked ~ .hamburger-lines .line3 {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        .checkbox:checked ~ .menu-items {
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-
     </style>
 </head>
 <body>
@@ -154,7 +45,7 @@
     <nav>
         <div class="navbar">
             <div class="container nav-container">
-                <input class="checkbox" type="checkbox" name="" id="" />
+                <input class="checkbox" type="checkbox" id="menuToggle" />
                 <div class="hamburger-lines">
                     <span class="line line1"></span>
                     <span class="line line2"></span>
@@ -177,8 +68,8 @@
     <div class="hero-section">
         <div class="container">
             <h1>Welcome to SENT1NEL</h1>
-            <p>Security Intelligence and Event Management at Your Fingertips</p>
-            <button class="cta-button">Get Started</button>
+            <p>Security Information and Event Management at Your Fingertips</p>
+            <button class="cta-button" id="getStartedBtn">Get Started</button>
         </div>
     </div>
 
@@ -201,6 +92,14 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // JavaScript for Get Started Button
+        document.getElementById('getStartedBtn').addEventListener('click', () => {
+            window.scrollTo({
+                top: document.querySelector('.features-section').offsetTop,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>

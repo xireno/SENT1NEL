@@ -19,6 +19,10 @@ body {
 .navbar {
   width: 100%;
   box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .nav-container {
@@ -269,7 +273,7 @@ body {
 
 #openFolderBtn {
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #4c84af;
   color: white;
   border: none;
   border-radius: 5px;
@@ -278,5 +282,144 @@ body {
 }
 
 #openFolderBtn:hover {
+  background-color: #60a0d0;
+}
+/* Existing styles remain untouched */
+
+.log-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.log-entry {
+  padding: 10px;
+  margin-bottom: 8px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+.hero-section {
+  background-image: url('/static/images/hero-background.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Features Section Animation */
+.features-section {
+  padding: 50px 20px;
+  text-align: center;
+  animation: fadeInUp 2s ease-in-out;
+}
+
+.features-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.features-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.feature-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 30%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 2.5s ease-in-out;
+}
+
+.feature-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .feature-box {
+      width: 100%;
+  }
+}
+
+.menu-items a {
+  color: white; /* Or your preferred color */
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8); /* White glow */
+  font-weight: 500;
+  font-size: 1.2rem;
+  transition: text-shadow 0.3s ease;
+}
+
+.menu-items a:hover {
+  text-shadow: 0px 0px 15px rgba(255, 255, 255, 1); /* Stronger glow on hover */
+}
+
+.hero-section h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: center;
+  color: white;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 30px rgba(0, 255, 255, 0.8); /* Light cyan glow */
+  animation: pulse 2s infinite alternate;
+}
+
+.hero-section p {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+/* Glow animation */
+@keyframes pulse {
+  from {
+    text-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.8),
+      0 0 20px rgba(255, 255, 255, 0.6),
+      0 0 30px rgba(0, 255, 255, 0.8);
+  }
+  to {
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 1),
+      0 0 30px rgba(0, 255, 255, 1),
+      0 0 40px rgba(0, 255, 255, 1);
+  }
+}
+.cta-button {
+  margin-top: 30px;
+  padding: 15px 30px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.7), 0 0 20px rgba(76, 175, 80, 0.5); /* Green glow */
+  transition: all 0.3s ease-in-out;
+}
+
+.cta-button:hover {
   background-color: #45a049;
+  box-shadow: 0 0 20px rgba(76, 255, 100, 1), 0 0 40px rgba(76, 255, 100, 0.8); /* Stronger glow */
 }
